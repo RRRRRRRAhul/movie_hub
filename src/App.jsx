@@ -6,6 +6,7 @@ import TopRated from "./pages/TopRated";
 import Popular from "./pages/Popular";
 import Upcoming from "./pages/Upcoming";
 import Genre from "./pages/Genre";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/movie/popular" element={<Popular/>} />
           <Route path="/movie/upcoming" element={<Upcoming/>} />
           <Route path="/movie/genre/:genreId/:genreName" element={<Genre/>} />
+          <Route path="/search/:query" element={<SearchResults/>} />
         </Routes>
       </div>
     </>

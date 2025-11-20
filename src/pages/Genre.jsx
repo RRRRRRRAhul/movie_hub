@@ -8,11 +8,35 @@ const Genre = () => {
   const dispatch = useDispatch();
   const { genreId } = useParams();
   const { genreName } = useParams();
-  const { movie, loading, error } = useSelector((state) => state.genre);
+  const { movie, loading, error, page, hasMore } = useSelector((state) => state.genre);
 
   useEffect(() => {
     dispatch(fetchGenreMovies(genreId));
   }, [dispatch, genreId]);
+
+  // Infinite Scroll Effect
+    useEffect(() => {
+      let isThrottled = false;
+  
+      const handleScroll = () => {
+        if (isThrottled) return;
+        isThrottled = true;
+  
+        setTimeout(() => (isThrottled = false), 300);
+  
+        const reachedBottom =
+          window.innerHeight + window.scrollY >=
+          document.documentElement.offsetHeight - 200;
+  
+        if (reachedBottom && !loading && hasMore) {
+          dispatch(fetchGenreMovies(genreId)); // fetch next page
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, [dispatch, loading, hasMore, page]);
+  
 
   return (
     <div className="container py-4">
