@@ -40,7 +40,7 @@ const SearchResults = () => {
     <div className="container mt-4">
 
       {/* PAGE TITLE */}
-      <h2 className="mb-4 text-light">
+      <h2 className="mb-4 text-light text-center">
         Search Results for: <span className="text-info">"{query}"</span>
       </h2>
 

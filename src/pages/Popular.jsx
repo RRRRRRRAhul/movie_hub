@@ -42,7 +42,7 @@ const Popular = () => {
   
   return (
     <div className="container py-4">
-      <h2 className="text-light mb-3">Popular Movies</h2>
+      <h2 className="text-light text-center mb-3">Popular Movies</h2>
 
       {movies.length === 0 && loading && (
         <p className="text-light">Loading movies...</p>

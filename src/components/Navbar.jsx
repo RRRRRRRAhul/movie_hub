@@ -19,8 +19,9 @@ const Navbar = () => {
       <div className="container-fluid">
 
         {/* Brand */}
-        <Link className="navbar-brand fw-bold text-light" to="/">MovieDB</Link>
-
+        
+        <Link className="navbar-brand fw-bold text-light" to="/"><h3>🎬MovieDB</h3></Link>
+        
         {/* Toggler */}
         <button
           className="navbar-toggler"
