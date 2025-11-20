@@ -21,10 +21,14 @@ const SearchResults = () => {
 
   // Infinite Scroll
   useEffect(() => {
+    let isThrottled = false;
     const handleScroll = () => {
+      if (isThrottled) return;
+      isThrottled = true;
+      setTimeout(() => (isThrottled = false), 300);
       if (
-        window.innerHeight + window.scrollY >=
-          document.documentElement.offsetHeight - 200 &&
+         window.innerHeight + window.scrollY >=
+        document.documentElement.offsetHeight - 200 &&
         !loading &&
         hasMore
       ) {
@@ -38,7 +42,6 @@ const SearchResults = () => {
 
   return (
     <div className="container mt-4">
-
       {/* PAGE TITLE */}
       <h2 className="mb-4 text-light text-center">
         Search Results for: <span className="text-info">"{query}"</span>
