@@ -52,7 +52,7 @@ A feature-rich movie browsing web application built with **React**, **React Rout
 
 ```bash
 # Clone the repository
-git clone <your-repository-link>
+git clone https://github.com/RRRRRRRAhul/movie_hub
 
 # Navigate to project folder
 cd movie-hub
