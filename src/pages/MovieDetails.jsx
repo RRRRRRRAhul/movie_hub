@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMoviesDataById } from "../store/movieDetailSlice";
+import { fetchCastaandCrewByMovieId } from "../store/castAndCrewSlice";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -8,9 +9,15 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
 
   const { movie, loading, error } = useSelector((state) => state.movieDetail);
+  const { cast, crew, cdloading, cderror } = useSelector(
+    (state) => state.castAndCrew
+  );
+  const director = crew.find((person) => person.job === "Director");
+  const topCast = cast.slice(0, 20);
 
   useEffect(() => {
     dispatch(fetchMoviesDataById(id));
+    dispatch(fetchCastaandCrewByMovieId(id));
   }, [dispatch, id]);
 
   if (loading || !movie) {
@@ -68,6 +75,54 @@ const MovieDetails = () => {
 
           <h5 className="mt-3">Overview</h5>
           <p>{movie.overview}</p>
+
+          <hr />
+
+          {/* 🎬 Director */}
+          {director && (
+            <div className="mt-5 d-flex align-items-center gap-3">
+              <img
+                src={
+                  director.profile_path
+                    ? `https://image.tmdb.org/t/p/w185${director.profile_path}`
+                    : "https://via.placeholder.com/80x120?text=No+Image"
+                }
+                alt={director.name}
+                className="rounded shadow-sm"
+                style={{ width: "80px", height: "120px", objectFit: "cover" }}
+              />
+
+              <h3 className="mb-0">
+                <b>Director:</b> {director.name}
+              </h3>
+            </div>
+          )}
+
+          {/* 🎭 Cast Section */}
+          <h4 className="mt-4">Top Cast</h4>
+
+          {cdloading && <p>Loading cast...</p>}
+          {cderror && <p className="text-danger">{cderror}</p>}
+
+          <div className="row mt-2">
+            {topCast.map((actor) => (
+              <div key={actor.id} className="col-6 col-md-3 col-lg-2 mb-3">
+                <div className="text-center">
+                  <img
+                    src={
+                      actor.profile_path
+                        ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                        : "https://via.placeholder.com/185x278?text=No+Image"
+                    }
+                    alt={actor.name}
+                    className="img-fluid rounded shadow-sm"
+                  />
+                  <p className="mt-2 mb-0 fw-bold">{actor.name}</p>
+                  <small className="text-muted">{actor.character}</small>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

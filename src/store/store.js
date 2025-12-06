@@ -6,6 +6,7 @@ import topRatedReducer from "./topRatedSlice";
 import upcomingMovieReducer from "./upcomingMoviesSlice";
 import genreReducer from "./genreSlice";
 import searchReducer from "./searchSlice";
+import castAndCrewReducer from "./castAndCrewSlice";
 
 const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
         topRated: topRatedReducer,
         upcoming: upcomingMovieReducer,
         genre: genreReducer,
-        search: searchReducer
+        search: searchReducer,
+        castAndCrew: castAndCrewReducer,
     }
 });
 
